@@ -40,6 +40,7 @@ app.use(function(req, res, next) {
 
 app.post('/updateDevice', (req,res) => {
     //if(req)
+    console.log(req.body);
     if(deviceList[req.body.deviceId-1].deviceLocation != req.body.deviceLocation){
         deviceList[req.body.deviceId-1].deviceLocationHistory.push(deviceList[req.body.deviceId-1].deviceLocation);
         deviceList[req.body.deviceId-1].deviceLocation = req.body.deviceLocation;
@@ -47,9 +48,12 @@ app.post('/updateDevice', (req,res) => {
     if(deviceList[req.body.deviceId-1].isOnline != req.body.isOnline){
         deviceList[req.body.deviceId-1].isOnline = req.body.isOnline
     }
+    
     //deviceList[req.body.deviceId-1] = req.body;
     console.log(deviceList[req.body.deviceId-1]);
     if(webs){webs.send(JSON.stringify(deviceList))}
+    
+    res.send({});
 })
 
 app.get('/get', (req,res) => {
